@@ -13,17 +13,17 @@ void    *ft_memset(void *str, int c, size_t n)
 }
 
 
-// Test function to compare your ft_memset with the original memset
-int test_memset(void *str, int c, size_t n, size_t size)
-{
-    void *original_result = memset(str, c, n);
-    void *custom_result = ft_memset(str, c, n);
+// // Test function to compare your ft_memset with the original memset
+// int test_memset(void *str, int c, size_t n, size_t size)
+// {
+//     void *original_result = memset(str, c, n);
+//     void *custom_result = ft_memset(str, c, n);
     
-    if (memcmp(original_result, custom_result, size) == 0)
-        return 1; // Test passed
-    else
-        return 0; // Test failed
-}
+//     if (memcmp(original_result, custom_result, size) == 0)
+//         return 1; // Test passed
+//     else
+//         return 0; // Test failed
+// }
 
 // int main() {
 //     char buffer[20];

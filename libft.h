@@ -33,8 +33,10 @@ int			ft_isascii(int c);
 int			ft_isprint(int c);
 int			ft_toupper(int c);
 int			ft_tolower(int c);
-char		*ft_strnew(size_t size);
+void		*ft_memalloc(size_t size);
 void		ft_memdel(void **ap);
-void	*ft_memalloc(size_t size);
+char		*ft_strnew(size_t size);
+void		ft_strdel(char **as);
+void		ft_strclr(char *s);
 
 #endif

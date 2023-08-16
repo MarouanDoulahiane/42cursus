@@ -15,5 +15,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int,char))
 		}
 		result[i] = '\0';
 	}
+	else
+		return (NULL);
 	return (result);
 }

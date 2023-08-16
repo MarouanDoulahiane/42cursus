@@ -15,5 +15,7 @@ char	*ft_strmap(char const *s, char (*f)(char))
 		}
 		result[i] = '\0';
 	}
+	else
+		return (NULL);
 	return (result);
 }

@@ -1,50 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/09 14:33:44 by marvin            #+#    #+#             */
+/*   Updated: 2023/10/09 14:33:44 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void	recursion_ft(char *result, int tmp_n)
+size_t	get_nb_len(int n)
 {
-	if (tmp_n == -2147483648)
+	size_t	size;
+
+	size = 0;
+	if (n < 0)
+		size++;
+	while (n)
 	{
-		ft_strcpy(result, "-2147483648");
+		n /= 10;
+		size++;
 	}
-	else
-	{
-		if (tmp_n < 0)
-		{
-			*result = '-';
-			tmp_n *= -1;
-		}
-		if (tmp_n >= 10)
-		{
-			recursion_ft(result, tmp_n / 10);
-			recursion_ft(result, tmp_n % 10);
-		}
-		else
-		{
-			while (*result)
-				result++;
-			*result = tmp_n + '0';
-		}
-	}
+	return (size);
 }
 
 char	*ft_itoa(int n)
 {
-	int	tmp_n;
-	int	degit_len;
-	char	*result;
+	size_t	size;
+	char	*res;
 
-	tmp_n = n;
-	degit_len = 0;
-	if (tmp_n == 0 || tmp_n < 0)
-		degit_len = 1;
-	while (tmp_n != 0)
-	{
-		tmp_n /= 10;
-		degit_len++;
-	}
-	tmp_n = n;
-	if (!(result = (char *)ft_strnew(degit_len)))
+	if (n == 0)
+		return (ft_strdup("0"));
+	else if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	size = get_nb_len(n);
+	res = malloc(size + 1);
+	if (!res)
 		return (NULL);
-	recursion_ft(result, tmp_n);
-	return (result);
+	if (n < 0)
+	{
+		n = -n;
+		res[0] = '-';
+	}
+	res[size] = '\0';
+	while (n)
+	{
+		size--;
+		res[size] = 48 + (n % 10);
+		n /= 10;
+	}
+	return (res);
 }

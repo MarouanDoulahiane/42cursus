@@ -3,34 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdoulahi <mdoulahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 04:08:26 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/09 04:08:26 by marvin           ###   ########.fr       */
+/*   Created: 2023/10/30 13:33:22 by mdoulahi          #+#    #+#             */
+/*   Updated: 2023/10/30 13:38:29 by mdoulahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *nptr)
-{
-	int	i;
-	int	nb;
-	int	signe;
+#include "libft.h"
 
-	i = 0;
+int	ft_atoi(const char *str)
+{
+	int	nb;
+	int	i;
+	int	signal;
+
 	nb = 0;
-	signe = 1;
-	while (nptr[i] && (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13)))
+	i = 0;
+	signal = 1;
+	while (str[i] && (str[i] == 32 || (str[i] >= 9 && str[i] <= 13)))
 		i++;
-	if (nptr[i] && (nptr[i] == '-' || nptr[i] == '+'))
+	if (str[i] == '+' || str[i] == '-')
 	{
-		if (nptr[i] == '-')
-			signe = -1;
+		if (str[i] == '-')
+			signal = -1;
 		i++;
 	}
-	while (nptr[i] && nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		nb = nb * 10 + nptr[i] - '0';
-		i++;
-	}
-	return (nb * signe);
+	while (str[i] && ft_isdigit(str[i]))
+		nb = nb * 10 + str[i++] - 48;
+	return (nb * signal);
 }

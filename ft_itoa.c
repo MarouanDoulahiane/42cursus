@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdoulahi <mdoulahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 14:33:44 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/09 14:33:44 by marvin           ###   ########.fr       */
+/*   Created: 2023/10/30 16:54:59 by mdoulahi          #+#    #+#             */
+/*   Updated: 2023/11/01 22:12:51 by mdoulahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	get_nb_len(int n)
+static size_t	ft_intlen(int n)
 {
 	size_t	size;
 
@@ -36,7 +36,7 @@ char	*ft_itoa(int n)
 		return (ft_strdup("0"));
 	else if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
-	size = get_nb_len(n);
+	size = ft_intlen(n);
 	res = malloc(size + 1);
 	if (!res)
 		return (NULL);
@@ -49,7 +49,7 @@ char	*ft_itoa(int n)
 	while (n)
 	{
 		size--;
-		res[size] = 48 + (n % 10);
+		res[size] = n % 10 + 48;
 		n /= 10;
 	}
 	return (res);

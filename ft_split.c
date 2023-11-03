@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdoulahi <mdoulahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 02:07:27 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/10 02:07:27 by marvin           ###   ########.fr       */
+/*   Created: 2023/10/30 16:25:47 by mdoulahi          #+#    #+#             */
+/*   Updated: 2023/11/02 03:54:59 by mdoulahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	counter(char const *s, char c)
+static size_t	word_count(char const *s, char c)
 {
-	int	i;
-	int	size;
+	size_t	size;
+	size_t	i;
 
-	i = 0;
 	size = 0;
+	i = 0;
 	while (s[i])
 	{
-		while (s[i] == c)
+		while (s[i] == c && s[i])
 			i++;
-		if (s[i] && s[i] != c)
+		if (s[i])
 		{
 			size++;
 			while (s[i] != c && s[i])
@@ -33,71 +33,71 @@ int	counter(char const *s, char c)
 	return (size);
 }
 
-char	*get_word(int *index, char const *s, char c)
+static char	*get_next_word(size_t *i, char const *s, char c)
 {
+	size_t	index;
+	size_t	size;
+	size_t	tmp;
 	char	*res;
-	int		size;
-	int		i;
 
-	size = 0;
-	i = 0;
-	while (s[*index] == c && s[*index])
-		(*index)++;
-	while (s[*index] != c && s[*index])
-	{
-		(*index)++;
-		size++;
-	}
-	res = (char *)malloc(sizeof(char) * (size + 1));
+	while (s[*i] && s[*i] == c)
+		(*i)++;
+	tmp = *i;
+	while (s[*i] && s[*i] != c)
+		(*i)++;
+	size = *i - tmp;
+	res = malloc(size + 1);
 	if (!res)
 		return (NULL);
-	while (i < size)
+	index = 0;
+	while (tmp + index < *i)
 	{
-		res[i] = s[*index - size + i];
-		i++;
+		res[index] = s[tmp + index];
+		index++;
 	}
-	res[i] = '\0';
+	res[index] = '\0';
 	return (res);
 }
 
-char	**free2d(char **arr)
+static char	**free2d(char **arr)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	if (!arr)
-		return (NULL);
-	while (arr[i])
+	if (arr)
 	{
-		free(arr[i]);
-		i++;
+		while (arr[i])
+		{
+			free(arr[i]);
+			i++;
+		}
+		free(arr);
 	}
-	free(arr);
 	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**arr;
-	int		wc;
-	int		i;
-	int		index;
+	size_t	index;
+	size_t	wc;
+	size_t	i;
+	char	**res;
 
 	if (!s)
 		return (NULL);
-	wc = counter(s, c);
-	arr = (char **)malloc(sizeof(char *) * (wc + 1));
-	if (!arr)
-		return (NULL);
 	i = 0;
 	index = 0;
-	while (i < wc)
+	wc = word_count(s, c);
+	res = (char **)malloc(sizeof(char *) * (wc + 1));
+	if (!res)
+		return (NULL);
+	while (index < wc)
 	{
-		arr[i] = get_word(&index, s, c);
-		if (!arr[i])
-			return (free2d(arr));
-		i++;
+		res[index] = get_next_word(&i, s, c);
+		if (!res[index])
+			return (free2d(res));
+		index++;
 	}
-	arr[i] = NULL;
-	return (arr);
+	res[wc] = NULL;
+	return (res);
 }

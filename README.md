@@ -1,11 +1,3 @@
-<p align="center">
-	<img src="https://img.shields.io/badge/status-finished-success?color=%2312bab9&style=flat-square" />
-	<img src="https://img.shields.io/badge/evaluated-not%20yet-success?color=%2312bab9&style=flat-square" />
-	<img src="https://img.shields.io/badge/score-125%20%2F%20100-success?color=%2312bab9&style=flat-square" />
-	<img src="https://img.shields.io/github/languages/top/mdoulahi/libft?color=%2312bab9&style=flat-square" />
-	<img src="https://img.shields.io/github/last-commit/mdoulahi/libft?color=%2312bab9&style=flat-square" />
-	<a href='https://www.linkedin.com/in/marouan-doulahiane-1a362b258/' target="_blank"><img alt='Linkedin' src='https://img.shields.io/badge/LinkedIn-100000?style=flat-square&logo=Linkedin&logoColor=white&labelColor=0A66C2&color=0A66C2'/></a>
-</p>
 
 <p align="center">
 	<a href="#about">About</a> •
